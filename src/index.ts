@@ -34,7 +34,7 @@ const main = async () => {
         sameSite: 'lax',
       },
       resave: false,
-      saveUninitialized: false
+      saveUninitialized: false,
     })
   );
 
@@ -43,12 +43,12 @@ const main = async () => {
       resolvers: [HelloResolver, PostResolver, UserResolver],
       validate: false,
     }),
-    context: ({req, res}): MyContext => ({ em: orm.em, req, res }),
+    context: ({ req, res }): MyContext => ({ em: orm.em, req, res }),
   });
 
   apolloServer.applyMiddleware({ app });
 
-  app.listen(3000, () => {
+  app.listen(4000, () => {
     console.log('server is running 🚀 on localhost:3000');
   });
 };
