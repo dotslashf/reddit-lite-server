@@ -40,17 +40,14 @@ class UserResponse {
 @Resolver()
 export class UserResolver {
   @Query(() => User, { nullable: true })
-  async me(
-    @Ctx() { req, em }: MyContext
-  ) {
+  async me(@Ctx() { req, em }: MyContext) {
     if (!req.session.userId) {
-      return null
+      return null;
     }
-    
-    const user = await em.findOne(User, { id: req.session.userId })
-    return user
-  }
 
+    const user = await em.findOne(User, { id: req.session.userId });
+    return user;
+  }
 
   @Mutation(() => UserResponse)
   async register(
@@ -68,7 +65,7 @@ export class UserResolver {
       };
     }
 
-    if (options.password.length <= 3) {
+    if (options.password.length <= 2) {
       return {
         errors: [
           {
@@ -135,7 +132,7 @@ export class UserResolver {
       };
     }
 
-    req.session.userId = user.id
+    req.session.userId = user.id;
 
     return {
       user,
