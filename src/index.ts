@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { PostResolver } from './resolvers/post';
 import { HelloResolver } from './resolvers/hello';
-import { __prod__, PORT } from './constant';
+import { __prod__, PORT, COOKIE_NAME } from './constant';
 import { MikroORM } from '@mikro-orm/core';
 import mikroOrmConfig from './mikro-orm.config';
 import express from 'express';
@@ -31,7 +31,7 @@ const main = async () => {
   );
   app.use(
     session({
-      name: 'qid',
+      name: COOKIE_NAME,
       store: new RedisStore({ client: redisClient, disableTouch: true }),
       secret: 'a very secreto',
       cookie: {

@@ -1,3 +1,4 @@
+import { COOKIE_NAME } from './../constant';
 import { MyContext } from './../types';
 import { User } from './../entities/User';
 import {
@@ -137,5 +138,24 @@ export class UserResolver {
     return {
       user,
     };
+  }
+
+  @Mutation(() => Boolean)
+  logout(@Ctx() { req, res }: MyContext) {
+    return new Promise(resolve => {
+      if (!req.session.userId) {
+        return resolve(false);
+      }
+
+      req.session.destroy(err => {
+        res.clearCookie(COOKIE_NAME);
+        if (err) {
+          console.log(err);
+          return resolve(false);
+        }
+
+        resolve(true);
+      });
+    });
   }
 }
