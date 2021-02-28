@@ -16,7 +16,6 @@ import cors from 'cors';
 
 const main = async () => {
   const orm = await MikroORM.init(mikroOrmConfig);
-  orm.getMigrator().up();
 
   const app = express();
 
