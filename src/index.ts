@@ -16,7 +16,6 @@ import cors from 'cors';
 import { createConnection } from 'typeorm';
 import path from 'path';
 
-// rerun
 const main = async () => {
   const conn = await createConnection({
     type: 'postgres',
@@ -28,7 +27,6 @@ const main = async () => {
     entities: [User, Post],
     migrations: [path.join(__dirname, './migrations/*')],
   });
-  await conn.runMigrations();
 
   const app = express();
 
